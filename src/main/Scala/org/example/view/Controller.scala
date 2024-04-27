@@ -5,17 +5,17 @@ import javafx.scene.control.{Button, ListView, SplitPane, TextArea, TextField}
 
 
 class Controller {
-  var url = "main.fxml"
+  var path = "main.fxml"
   @FXML protected var MessageList: ListView[Message] = null
-  @FXML protected var ContactList: ListView[Contacts] = null
-  @FXML protected var Send: Button = null
-  @FXML protected var window1: SplitPane = null
-  @FXML protected var PostText: TextArea = null
-  @FXML protected var Nck: TextField = null
-  @FXML protected var Logn: Button = null
+  @FXML protected var ContactList: ListView[Contacts] = _
+  @FXML protected var sendBtn: Button = _
+  @FXML protected var loginBtn: Button = _
+  @FXML protected var windowFX: SplitPane = _
+  @FXML protected var postTextArea: TextArea = _
+  @FXML protected var nicknameField: TextField = _
   @FXML private[example] def initialize(): Unit = {
-    assert(MessageList != null, "fx:id=\"MessageList\" was not injected: check your FXML file 'first.fxml'.")
-    assert(Send != null, "fx:id=\"Send\" was not injected: check your FXML file 'first.fxml'.")
-    assert(PostText != null, "fx:id=\"PostText\" was not injected: check your FXML file 'first.fxml'.")
+    assert(MessageList != null, "fx:id=\"messageList\" was not injected: check your FXML file 'first.fxml'.")
+    assert(sendBtn != null, "fx:id=\"sendBtn\" was not injected: check your FXML file 'first.fxml'.")
+    assert(postTextArea != null, "fx:id=\"postTextArea\" was not injected: check your FXML file 'first.fxml'.")
   }
 }

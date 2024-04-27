@@ -1,40 +1,52 @@
 package org.example.view
 
-class Contacts(adr: String, name: String, me: Boolean)/* extends Ordered[Contacts]*/ {
-  val address: String = adr
-  var Name: String = name
-  var itsMe: Boolean = me
+class Contacts(val address: String, var name: String, var isMe: Boolean) {
 
-  def getName = Name
+  def getName: String = name
 
-  //def setName = Name
-  def getAdress = address
+  def getAddress: String = address
 
 
-
-   def <(that: Contacts): Boolean = {
-    if (itsMe && !that.itsMe)
+  def <(that: Contacts): Boolean = {
+    if (isMe && !that.isMe)
       true
-    else if (Name < that.Name)
+    else if (name < that.name)
       true
     else
       false
   }
 
   override def toString: String = {
-    if(this != null)
-    "address = " + address + " name = " + Name
+    if (this != null)
+      "address = " + address + " name = " + name
     else
       "null"
   }
 
-   def compare(that: Contacts): Boolean = {
-    if(that.Name=="\u041e\u0431\u0449\u0438\u0439\u0020\u0447\u0430\u0442")
-     if (itsMe && !that.itsMe) {
-      true
-    }else {
-      Name < that.Name
-    }
+  def compare(that: Contacts): Boolean = {
+    if (that.name == "\u041e\u0431\u0449\u0438\u0439\u0020\u0447\u0430\u0442")
+      if (isMe && !that.isMe) {
+        true
+      } else {
+        name < that.name
+      }
     else
       false
-  }}
+  }
+
+  private def isEqual(other: Any): Boolean = other.isInstanceOf[Contacts]
+
+  override def equals(other: Any): Boolean = other match {
+    case that: Contacts =>
+      (that isEqual this) &&
+        address == that.address &&
+        name == that.name &&
+        isMe == that.isMe
+    case _ => false
+  }
+
+  override def hashCode(): Int = {
+    val state = Seq(address, name, isMe)
+    state.map(_.hashCode()).foldLeft(0)((a, b) => 31 * a + b)
+  }
+}

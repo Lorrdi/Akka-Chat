@@ -1,13 +1,13 @@
 plugins {
     id 'java'
-    id 'org.openjfx.javafxplugin' version '0.0.7'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
     id 'application'
     id 'scala'
 }
 
 group 'org.example'
 version '1.0-SNAPSHOT'
-sourceCompatibility = 11
+
 repositories {
     mavenCentral()
 }
@@ -25,15 +25,14 @@ dependencies {
     implementation "com.typesafe.akka:akka-cluster-typed_${versions.ScalaBinary}"
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-    compile 'org.scala-lang:scala-library:2.13.1'
-    compile group: 'com.typesafe.akka', name: "akka-actor-typed_2.13", version: '2.6.9'
-    compile group: 'com.typesafe.akka', name: "akka-remote_2.13", version: '2.6.9'
-    compile group: 'com.typesafe.akka', name: "akka-cluster-typed_2.13", version: '2.6.9'
-    //compile group: 'com.typesafe.akka', name: "akka-cluster_2.13", version: '2.6.9'
-    compile group: 'org.slf4j', name: "slf4j-simple", version: '1.7.21'
+    implementation 'org.scala-lang:scala-library:2.13.13'
+
+    implementation group: 'com.typesafe.akka', name: "akka-actor-typed_2.13", version: '2.6.9'
+    implementation group: 'com.typesafe.akka', name: "akka-remote_2.13", version: '2.6.9'
+    implementation group: 'com.typesafe.akka', name: "akka-cluster-typed_2.13", version: '2.6.9'
+    implementation group: 'org.slf4j', name: "slf4j-simple", version: '1.7.21'
 }
 
 application {
-    mainClassName = 'org.example.MainScala'
+    mainClassName = 'org.example.Main'
 }
-//mainClassName = 'org.example.Gui'

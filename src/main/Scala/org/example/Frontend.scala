@@ -1,143 +1,151 @@
 package org.example
 
-import scala.concurrent.duration._
-import akka.util.Timeout
-import akka.actor.typed.ActorRef
-import akka.actor.typed.Behavior
 import akka.actor.typed.receptionist.Receptionist
-import akka.actor.typed.scaladsl.ActorContext
-import akka.actor.typed.scaladsl.AskPattern.Askable
-import akka.actor.typed.scaladsl.Behaviors
-import akka.cluster.typed.Cluster
-import javafx.collections.FXCollections
+import akka.actor.typed.scaladsl.AskPattern.{Askable, schedulerFromActorSystem}
+import akka.actor.typed.scaladsl.{ActorContext, Behaviors}
+import akka.actor.typed.{ActorRef, Behavior, Scheduler}
+import akka.util.Timeout
 import javafx.scene.control.ListView
-import org.example.MainScala.context
-import org.example.Worker.{ChatWithThisParentAsk, DieW, MyName, MyNameAsk, NewName, SendMessage}
+import org.example.Worker._
 import org.example.view.{Contacts, Message}
 
 import scala.collection.mutable
-import scala.{+:, :+}
-import scala.concurrent.Await
-import scala.util.Failure
-import scala.util.Success
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
+import scala.concurrent.duration._
+import scala.util.{Failure, Success}
 
 //#frontend
 object Frontend {
 
-  sealed trait Event
+  private var worker: ActorRef[Worker.Command] = _
 
-  //private case object Tick extends Event
+  private val mapMessagesRef: mutable.Map[String, ActorRef[Command]] = mutable.Map[String, ActorRef[Worker.Command]]()
+  private var firstTime = true
+  private var mainWorkerName = new String
 
-  private final case class WorkersUpdated(newWorkers: Set[ActorRef[Worker.Command]]) extends Event
+  def apply(): Behavior[Event] = Behaviors.setup[Event] { ctx =>
+    val localPort = Main.localPort.toString
+
+    worker = ctx.spawn(Worker(), "Worker")
+    worker ! Worker.NewName(localPort)
+
+    mapMessagesRef(localPort) = worker
+    mainWorkerName = localPort
 
 
-  final case class UpdateInformations(replyTo: ActorRef[AnswerUpdateInformations]) extends Event with CborSerializable
-
-  final case class AnswerUpdateInformations(WorkersName: ListView[Contacts]) extends CborSerializable
-
-  final case class UpdateMessage(name: String, replyTo: ActorRef[AnswerUpdateMessage]) extends Event with CborSerializable
-
-  final case class AnswerUpdateMessage(Chat: List[Message], upd: Boolean) extends CborSerializable
-
-  final case class NewNameF(wName: String) extends Event
-
-  final case class Die () extends Event
-  final case class SendMessageF(message: Message) extends Event
-
-  var Wrk: ActorRef[Worker.Command] = null
-  var mapNameRef = mutable.Map[String, ActorRef[Worker.Command]]()
-  var firstTime = true
-  var myWorkerName = ""
-  var mapNameUpdMessages = mutable.Map[String, Boolean]()
-
-  def apply(): Behavior[Event] = Behaviors.setup { ctx =>
-    Behaviors.withTimers { timers =>
-      // subscribe to available workers
-      Wrk = ctx.spawn(Worker(), "Worker")
-      Wrk.tell(NewName(MainScala.LocalPort.toString))
-      myWorkerName = MainScala.LocalPort.toString
-      mapNameRef(MainScala.LocalPort.toString) = Wrk
-
-      val subscriptionAdapter = ctx.messageAdapter[Receptionist.Listing] {
-        case Worker.WorkerServiceKey.Listing(workers) =>
-          WorkersUpdated(workers)
-      }
-      ctx.system.receptionist ! Receptionist.Subscribe(Worker.WorkerServiceKey, subscriptionAdapter)
-
-      //timers.startTimerWithFixedDelay(Tick, Tick, 2.seconds)
-
-      running(ctx, IndexedSeq.empty, jobCounter = 0)
+    val subscriptionAdapter = ctx.messageAdapter[Receptionist.Listing] {
+      case Worker.workerServiceKey.Listing(workers) => WorkersUpdated(workers)
     }
+    ctx.system.receptionist ! Receptionist.Subscribe(Worker.workerServiceKey, subscriptionAdapter)
+
+    running(ctx, IndexedSeq.empty, 0)
   }
 
-  private def running(ctx: ActorContext[Event], workers: IndexedSeq[ActorRef[Worker.Command]], jobCounter: Int): Behavior[Event] =
+  private def running(ctx: ActorContext[Event],
+                      workers: IndexedSeq[ActorRef[Worker.Command]], jobCounter: Int): Behavior[Event] =
 
     Behaviors.receiveMessage {
+
       case WorkersUpdated(newWorkers) =>
         ctx.log.info("List of services registered with the receptionist changed: {}", newWorkers)
         running(ctx, newWorkers.toIndexedSeq, jobCounter)
 
-      case NewNameF(wName) =>
-        implicit val scheduler = ctx.system.scheduler
-        implicit val timeout: Timeout = 5.seconds
-        myWorkerName = wName
-        //mapNameUpdMessages(wName) = true
-        Wrk.tell(NewName(wName))
+      case NewNameEvent(newName) =>
+        mainWorkerName = newName
+        worker ! NewName(newName)
         Behaviors.same
 
       case Die() =>
-        Wrk ! DieW()
+        worker ! Stop()
         Behaviors.stopped
 
-      case SendMessageF(message) =>
+      case SendMessageEvent(message) =>
         if (message.getTo != "\u041e\u0431\u0449\u0438\u0439\u0020\u0447\u0430\u0442") {
-          mapNameRef(message.getFrom).tell(SendMessage(message))
           if (message.getFrom != message.getTo) {
-            mapNameRef(message.getTo).tell(SendMessage(message))
-          }
+            mapMessagesRef(message.getTo) ! SendMessage(message)
+          } else mapMessagesRef(message.getFrom) ! SendMessage(message)
         }
         else {
-          for (i <- mapNameRef) {
-              i._2.tell(SendMessage(message))
+          for (msg <- mapMessagesRef) {
+            msg._2.tell(SendMessage(message))
           }
         }
         Behaviors.same
 
-      case UpdateInformations(replyTo) =>
-        implicit val scheduler = ctx.system.scheduler
+      case UpdateInformation(replyTo) =>
+        import scala.concurrent.ExecutionContext.Implicits.global
+        implicit val scheduler: Scheduler = schedulerFromActorSystem(ctx.system)
         implicit val timeout: Timeout = 5.seconds
-        var newMapNameRef = mutable.Map[String, ActorRef[Worker.Command]]()
-        var VecView = Vector[Contacts]()
-        for (a <- workers) {
-          val b = Await.result(a.ask(MyNameAsk(_)), 10.seconds).name
-          newMapNameRef(b) = a
-          val pr = (a == Wrk)
-          val buf = (new Contacts(a.path.toString, b, pr))
-          VecView = VecView :+ buf
+
+        val futures = workers.map { ref =>
+          (ref ? MyNameAsk).mapTo[MyName].map { response =>
+            val name = response.name
+            (name, ref, ref == worker)
+          }
         }
 
-        if (newMapNameRef != mapNameRef || firstTime) {
-          mapNameRef = newMapNameRef
-          firstTime = false
-          VecView.sortWith((x, y) => x.compare(y))
-          var buf = new ListView[Contacts]()
-          for (i <- VecView) {
-            buf.getItems.add(i)
-          }
-          replyTo ! AnswerUpdateInformations(buf)
+        val allResults = Future.sequence(futures)
+
+        allResults.onComplete {
+          case Success(results) =>
+            val newMapMessagesRef: Map[String, ActorRef[Command]] =
+              results.map { case (name, actorRef, _) => name -> actorRef }.toMap
+            val vecView = results.map { case (name, actorRef, priority) =>
+              new Contacts(actorRef.path.toString, name, priority)
+            }.toVector.sortWith(_.compare(_))
+
+            if (newMapMessagesRef != mapMessagesRef || firstTime) {
+              mapMessagesRef.clear()
+              mapMessagesRef ++= newMapMessagesRef
+              firstTime = false
+
+              val buf = new ListView[Contacts]()
+              vecView.foreach(buf.getItems.add)
+              replyTo ! AnswerUpdateInformation(buf)
+            } else {
+              replyTo ! AnswerUpdateInformation(new ListView[Contacts]())
+            }
+
+          case Failure(exception) =>
+            exception.printStackTrace()
         }
-        replyTo ! AnswerUpdateInformations(new ListView[Contacts]())
+
         Behaviors.same
+
 
 
       case UpdateMessage(name, replyTo) =>
-        implicit val scheduler = ctx.system.scheduler
+        implicit val scheduler: Scheduler = ctx.system.scheduler
         implicit val timeout: Timeout = 5.seconds
-        val b = Await.result(Wrk.ask(ChatWithThisParentAsk(name, _)), 10.seconds).chat
-        replyTo ! AnswerUpdateMessage(b, true)
+        val result: Future[ChatWithThisParent] = worker.ask(ChatWithThisParentAsk(name, _))
+        result.foreach {
+          case response: ChatWithThisParent =>
+            replyTo ! AnswerUpdateMessage(response.chat, upd = true)
+          case _ =>
+            throw new RuntimeException("Unexpected response type")
+        }
+
         Behaviors.same
     }
+
+  sealed trait Event
+
+  final case class UpdateInformation(replyTo: ActorRef[AnswerUpdateInformation]) extends Event with CborSerializable
+
+  final case class AnswerUpdateInformation(workersName: ListView[Contacts]) extends CborSerializable
+
+  final case class UpdateMessage(name: String, replyTo: ActorRef[AnswerUpdateMessage]) extends Event with CborSerializable
+
+  final case class AnswerUpdateMessage(chat: List[Message], upd: Boolean) extends CborSerializable
+
+  final case class NewNameEvent(newName: String) extends Event
+
+  final case class Die() extends Event
+
+  final case class SendMessageEvent(message: Message) extends Event
+
+  private final case class WorkersUpdated(newWorkers: Set[ActorRef[Worker.Command]]) extends Event
 }
 
 
-//#frontend

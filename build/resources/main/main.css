@@ -6,26 +6,29 @@
 /*    --darkest-pink: #D96690;*/
 
 #body {
-    -fx-background-color: #88E8F2;
+    -fx-background-color: #ffffff;
 }
 
 #left-side {
-    -fx-border-color: #D96690;
+    -fx-border-color: #3b63dc;
     -fx-border-width: 0 1 0 0;
 }
 
 .text-field {
-    -fx-border-color: #F28DBC;
+    -fx-border-color: #ffffff;
 }
 
 #contacts {
-    -fx-background-color: #F2C9E0;
+    -fx-background-color: #ffffff;
 }
 
+#MessageList{
+    -fx-background-color: #ccfcfc;
+}
 .button {
-    -fx-background-color: #F28DBC;
+    -fx-background-color: #e82a2a;
 }
 
 .text-area {
-    -fx-border-color: #F28DBC;
+    -fx-border-color: #ffffff;
 }

@@ -1,11 +1,10 @@
-.list-cell:odd {
-    -fx-background-color: #9cfcff;
-}
-
-.list-cell:even {
-    -fx-background-color: #ffddf4;
+.list-cell {
+    -fx-background-color: #9384ff;
+    -fx-font-size: 17;
+    -fx-font-style: oblique;
+    -fx-font-weight: bold
 }
 
 .list-cell:empty {
-    -fx-background-color: #cefcff;
+    -fx-background-color: #c2f4ff;
 }
