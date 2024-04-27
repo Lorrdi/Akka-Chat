@@ -77,7 +77,7 @@ class ControllerScala extends Controller with Initializable {
 
   private def initViews(): Unit = {
 
-    //    MessageList.getItems.add(new Message)
+    MessageList.getItems.add(new Message)
     MessageList.getSelectionModel.setSelectionMode(SelectionMode.MULTIPLE)
     loginBtn.setOnAction((_: ActionEvent) => Login())
     sendBtn.setOnAction((_: ActionEvent) => Sender())
@@ -96,7 +96,9 @@ class ControllerScala extends Controller with Initializable {
           it =>
             it.getPostText == inputHint
         }
+
         MessageList.getItems.add(msg)
+
         MessageList.refresh()
 
         postTextArea.clear()
@@ -126,8 +128,7 @@ class ControllerScala extends Controller with Initializable {
 
   private def updateViewMessageList()(implicit ec: ExecutionContext): Unit = {
     if (partner != null) {
-      val newMessage = Main.updateMessageList(partner)
-      newMessage.map { msg =>
+      Main.updateMessageList(partner).map { msg =>
         println(msg.getItems.toString)
         if (!msg.getItems.isEmpty)
           if (!MessageList.getItems.containsAll(msg.getItems)) {
@@ -145,8 +146,7 @@ class ControllerScala extends Controller with Initializable {
       if (!newList.getItems.isEmpty) {
         val sortedList = newList.getItems.sorted
         Platform.runLater(() => {
-          ContactList.getItems.clear()
-          ContactList.getItems.addAll(sortedList)
+          ContactList.getItems.setAll(sortedList)
           ContactList.getItems.add(
             new Contacts("",
               "\u041e\u0431\u0449\u0438\u0439\u0020\u0447\u0430\u0442",

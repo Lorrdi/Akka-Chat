@@ -38,19 +38,6 @@ object Main extends App {
     }
   }
 
-
-  def rename(newName: String): Unit = {
-
-    frontend ! NewNameEvent(newName)
-
-  }
-
-  def sendMessage(message: Message): Unit = {
-
-    frontend ! SendMessageEvent(message)
-
-  }
-
   def updateMessageList(name: String): Future[ListView[Message]] = {
     implicit val scheduler: Scheduler = schedulerFromActorSystem(context.system)
     val updateList: Future[AnswerUpdateMessage] =
@@ -62,14 +49,21 @@ object Main extends App {
         updateMessage.chat.foreach { message =>
           listMessage.getItems.add(message)
         }
-        listMessage
       } else {
         println("Not new")
-        listMessage
       }
-
+      listMessage
     }
   }
+
+  def rename(newName: String): Unit = {
+    frontend ! NewNameEvent(newName)
+  }
+
+  def sendMessage(message: Message): Unit = {
+    frontend ! SendMessageEvent(message)
+  }
+
 
   private def startUp(port: Int): Unit = {
 

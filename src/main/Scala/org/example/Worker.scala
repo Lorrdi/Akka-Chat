@@ -10,8 +10,8 @@ import scala.collection.mutable
 object Worker {
 
   val workerServiceKey: ServiceKey[Command] = ServiceKey[Worker.Command]("Worker")
-  private var workerName = new String
   private val mapNameMessengers: mutable.Map[String, List[Message]] = mutable.Map[String, List[Message]]()
+  private var workerName = new String
 
   def apply(): Behavior[Command] =
     Behaviors.setup { ctx =>
@@ -27,15 +27,19 @@ object Worker {
           replyTo ! MyName(workerName)
           Behaviors.same
         case SendMessage(message) =>
-          val partner: String = if (message.getTo != workerName) {
-            message.getTo // Message is intended for someone else
-          } else {
-            message.getFrom // Message is received from someone else
-          }
-          val updatedMessages = mapNameMessengers.getOrElse(partner, List.empty) :+ message
-          mapNameMessengers += (partner -> updatedMessages)
-          Behaviors.same
 
+          val partner: String = if (message.getTo != workerName) {
+            message.getTo
+          }
+          else {
+            message.getFrom
+          }
+          if (mapNameMessengers.contains(partner)) {
+            mapNameMessengers(partner) = mapNameMessengers(partner) :+ message
+
+          } else
+            mapNameMessengers(partner) = List(message)
+          Behaviors.same
 
 
         case ChatWithThisParentAsk(name, replyTo) =>

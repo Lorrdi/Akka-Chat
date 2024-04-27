@@ -12,10 +12,6 @@ import java.io.IOException
 class ScalaWindow extends Application {
   private var primaryStage: Stage = _
 
-  def main(): Unit = {
-    Application.launch()
-  }
-
 
   override def start(primaryStage: Stage): Unit = {
     try {

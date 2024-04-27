@@ -30,8 +30,8 @@ object Frontend {
     worker = ctx.spawn(Worker(), "Worker")
     worker ! Worker.NewName(localPort)
 
-    mapMessagesRef(localPort) = worker
     mainWorkerName = localPort
+    mapMessagesRef(localPort) = worker
 
 
     val subscriptionAdapter = ctx.messageAdapter[Receptionist.Listing] {
@@ -100,7 +100,7 @@ object Frontend {
               mapMessagesRef ++= newMapMessagesRef
               firstTime = false
 
-              val buf = new ListView[Contacts]()
+              val buf = new ListView[Contacts]
               vecView.foreach(buf.getItems.add)
               replyTo ! AnswerUpdateInformation(buf)
             } else {
