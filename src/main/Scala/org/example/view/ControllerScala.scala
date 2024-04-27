@@ -96,10 +96,7 @@ class ControllerScala extends Controller with Initializable {
           it =>
             it.getPostText == inputHint
         }
-
         MessageList.getItems.add(msg)
-
-        MessageList.refresh()
 
         postTextArea.clear()
       }
@@ -129,7 +126,6 @@ class ControllerScala extends Controller with Initializable {
   private def updateViewMessageList()(implicit ec: ExecutionContext): Unit = {
     if (partner != null) {
       Main.updateMessageList(partner).map { msg =>
-        println(msg.getItems.toString)
         if (!msg.getItems.isEmpty)
           if (!MessageList.getItems.containsAll(msg.getItems)) {
             Platform.runLater { () =>

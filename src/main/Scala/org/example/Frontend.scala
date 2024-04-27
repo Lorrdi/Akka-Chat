@@ -64,6 +64,7 @@ object Frontend {
         if (message.getTo != "\u041e\u0431\u0449\u0438\u0439\u0020\u0447\u0430\u0442") {
           if (message.getFrom != message.getTo) {
             mapMessagesRef(message.getTo) ! SendMessage(message)
+            mapMessagesRef(message.getFrom) ! SendMessage(message)
           } else mapMessagesRef(message.getFrom) ! SendMessage(message)
         }
         else {
