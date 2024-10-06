@@ -9,68 +9,53 @@ import scala.collection.mutable
 
 object Worker {
 
-  val workerServiceKey: ServiceKey[Command] = ServiceKey[Worker.Command]("Worker")
-  private val mapNameMessengers: mutable.Map[String, List[Message]] = mutable.Map[String, List[Message]]()
-  private var workerName = new String
+  val WorkerServiceKey: ServiceKey[Command] = ServiceKey[Command]("Worker")
 
   def apply(): Behavior[Command] =
     Behaviors.setup { ctx =>
       ctx.log.info("Registering myself with receptionist")
-      ctx.system.receptionist ! Receptionist.Register(workerServiceKey, ctx.self)
+      ctx.system.receptionist ! Receptionist.Register(WorkerServiceKey, ctx.self)
 
-      Behaviors.receiveMessage {
-
-        case NewName(name) =>
-          workerName = name
-          Behaviors.same
-        case MyNameAsk(replyTo) =>
-          replyTo ! MyName(workerName)
-          Behaviors.same
-        case SendMessage(message) =>
-
-          val partner: String = if (message.getTo != workerName) {
-            message.getTo
-          }
-          else {
-            message.getFrom
-          }
-          if (mapNameMessengers.contains(partner)) {
-            mapNameMessengers(partner) = mapNameMessengers(partner) :+ message
-
-          } else
-            mapNameMessengers(partner) = List(message)
-          Behaviors.same
-
-
-        case ChatWithThisParentAsk(name, replyTo) =>
-          if (mapNameMessengers.contains(name)) {
-            replyTo ! ChatWithThisParent(mapNameMessengers(name))
-            Behaviors.same
-          }
-          else {
-            replyTo ! ChatWithThisParent(List(new Message()))
-            Behaviors.same
-          }
-
-        case Stop() =>
-          Behaviors.stopped
-      }
+      new WorkerBehavior().behavior
     }
+
+  private class WorkerBehavior {
+    private val mapNameMessengers: mutable.Map[String, List[Message]] = mutable.Map.empty
+    private var workerName: String = ""
+
+    def behavior: Behavior[Command] = Behaviors.receiveMessage {
+      case NewName(name) =>
+        workerName = name
+        Behaviors.same
+
+      case MyNameAsk(replyTo) =>
+        replyTo ! MyName(workerName)
+        Behaviors.same
+
+      case SendMessage(message) =>
+        val partner = if (message.getTo != workerName) message.getTo else message.getFrom
+        mapNameMessengers.updateWith(partner) {
+          case Some(messages) => Some(messages :+ message)
+          case None => Some(List(message))
+        }
+        Behaviors.same
+
+      case ChatWithThisParentAsk(name, replyTo) =>
+        replyTo ! ChatWithThisParent(mapNameMessengers.getOrElse(name, List(new Message())))
+        Behaviors.same
+
+      case Stop() =>
+        Behaviors.stopped
+    }
+  }
 
   sealed trait Command
 
-  final case class NewName(name: String) extends CborSerializable with Command
-
+  final case class NewName(name: String) extends Command with CborSerializable
   final case class MyNameAsk(replyTo: ActorRef[MyName]) extends Command with CborSerializable
-
   final case class MyName(name: String) extends CborSerializable
-
   final case class ChatWithThisParentAsk(name: String, replyTo: ActorRef[ChatWithThisParent]) extends Command with CborSerializable
-
   final case class ChatWithThisParent(chat: List[Message]) extends CborSerializable
-
   final case class SendMessage(message: Message) extends Command with CborSerializable
-
   final case class Stop() extends Command
-
 }

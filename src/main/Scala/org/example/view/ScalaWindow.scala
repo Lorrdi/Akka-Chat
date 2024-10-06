@@ -7,34 +7,27 @@ import javafx.scene.layout.HBox
 import javafx.stage.Stage
 import org.example.Main
 
-import java.io.IOException
+import scala.util.{Failure, Success, Try}
 
 class ScalaWindow extends Application {
   private var primaryStage: Stage = _
 
-
   override def start(primaryStage: Stage): Unit = {
-    try {
-      this.primaryStage = primaryStage
-      primaryStage.setTitle("Клиент" + " " + Main.localPort)
-      showBaseWindow()
-    } catch {
-      case e: IOException =>
-        e.printStackTrace()
-    }
+    this.primaryStage = primaryStage
+    primaryStage.setTitle("Chat")
+    showBaseWindow()
   }
 
   private def showBaseWindow(): Unit = {
-    try {
-      val loader: FXMLLoader = new FXMLLoader
-      loader.setLocation(classOf[Controller].getResource("/main.fxml"))
-      val rootLayout: HBox = loader.load
-      val scene: Scene = new Scene(rootLayout)
+    Try {
+      val loader = new FXMLLoader(classOf[Controller].getResource("/main.fxml"))
+      val rootLayout = loader.load[HBox]()
+      val scene = new Scene(rootLayout)
       primaryStage.setScene(scene)
       primaryStage.show()
-    } catch {
-      case e: IOException =>
-        e.printStackTrace()
+    } match {
+      case Success(_) => // Window loaded successfully
+      case Failure(e) => e.printStackTrace()
     }
   }
 
@@ -42,7 +35,5 @@ class ScalaWindow extends Application {
     Main.stop()
     Platform.exit()
     System.exit(0)
-
-    super.stop()
   }
 }

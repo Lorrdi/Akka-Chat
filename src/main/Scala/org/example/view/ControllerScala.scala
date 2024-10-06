@@ -2,166 +2,157 @@ package org.example.view
 
 import akka.util.Timeout
 import javafx.application.Platform
-import javafx.event.ActionEvent
-import javafx.fxml.Initializable
+import javafx.fxml.{FXML, Initializable}
 import javafx.geometry.Pos
-import javafx.scene.control.{ListCell, ListView, SelectionMode}
+import javafx.scene.control.{
+  Button,
+  ListCell,
+  ListView,
+  SelectionMode,
+  TextArea,
+  TextField
+}
 import javafx.scene.text.TextAlignment
 import org.example.Main
 
 import java.net.URL
 import java.util.{ResourceBundle, Timer, TimerTask}
-import scala.concurrent.ExecutionContext
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 import scala.concurrent.duration.DurationInt
-
+import scala.jdk.CollectionConverters._
 
 class ControllerScala extends Controller with Initializable {
 
-  private val timerTask = new MyTimerTask()
   private val timer = new Timer(true)
-  timerTask.upd(this)
-
   implicit val timeout: Timeout = Timeout(3.seconds)
-  private val inputHint = "\u0412\u0432\u0435\u0434\u0438\u0442\u0435\u0020\u0442\u0435\u043a\u0441\u0442\u0020\u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u044f"
-  var partner: String = _
-  var name: String = _
-  private var counter = 0
+  private val inputHint = "Введите текст сообщения"
+  private var partner: String = _
+  private var name: String = _
 
   override def initialize(location: URL, resources: ResourceBundle): Unit = {
-    import javafx.beans.value.{ChangeListener, ObservableValue}
-    if (counter == 0) {
-      timer.scheduleAtFixedRate(timerTask, 1, 1_000)
-    }
-
-    ContactList.getSelectionModel.setSelectionMode(SelectionMode.SINGLE)
-    ContactList.getSelectionModel.selectedItemProperty.addListener(new ChangeListener[Contacts]() {
-      override def changed(observable: ObservableValue[_ <: Contacts], oldValue: Contacts, newValue: Contacts): Unit = {
-        if (newValue != null)
-          partner = newValue.name
-        postTextArea.setPromptText(partner + " : " + name)
-      }
-    })
-
-    ContactList.setCellFactory((_: ListView[Contacts]) => new ListCell[Contacts]() {
-      override protected def updateItem(item: Contacts, empty: Boolean): Unit = {
-        super.updateItem(item, empty)
-        if (empty || item == null || item.getName == null) setText(null)
-        else setText(item.getName)
-      }
-    })
-
-    MessageList.setCellFactory((_: ListView[Message]) => new ListCell[Message] {
-      override protected def updateItem(item: Message, empty: Boolean): Unit = {
-        super.updateItem(item, empty)
-        if (empty || item == null || item.getPostText == null) {
-          setText(null)
-        } else {
-          if (item.getFrom != null) {
-            setText(item.getFrom + ": " + item.getPostText)
-          } else {
-            setText(item.getPostText)
-          }
-          setTextAlignment(if (item.getFrom == name) TextAlignment.LEFT else TextAlignment.RIGHT)
-          setAlignment(
-            if (item.getFrom == null) Pos.CENTER
-            else if (item.getFrom == name) Pos.CENTER_RIGHT
-            else Pos.CENTER_LEFT
-          )
-        }
-      }
-    })
-
-
-    initViews()
+    initializeListViews()
+    initializeButtons()
+    initializeTimer()
   }
 
-  private def initViews(): Unit = {
+  private def initializeListViews(): Unit = {
+    ContactList.getSelectionModel.setSelectionMode(SelectionMode.SINGLE)
+    ContactList.getSelectionModel.selectedItemProperty.addListener {
+      (_, _, newValue) =>
+        Option(newValue).foreach { contact =>
+          partner = contact.name
+          postTextArea.setPromptText(s"$partner : $name")
+        }
+    }
+
+    ContactList.setCellFactory(_ =>
+      new ListCell[Contacts] {
+        override def updateItem(item: Contacts, empty: Boolean): Unit = {
+          super.updateItem(item, empty)
+          setText(if (empty || item == null) null else item.name)
+        }
+      }
+    )
+
+    MessageList.setCellFactory(_ =>
+      new ListCell[Message] {
+        override def updateItem(item: Message, empty: Boolean): Unit = {
+          super.updateItem(item, empty)
+          if (empty || item == null) {
+            setText(null)
+          } else {
+            setText(
+              Option(item.getFrom)
+                .map(from => s"$from: ${item.getPostText}")
+                .getOrElse(item.getPostText)
+            )
+            setTextAlignment(
+              if (item.getFrom == name) TextAlignment.LEFT
+              else TextAlignment.RIGHT
+            )
+            setAlignment(
+              if (item.getFrom == null) Pos.CENTER
+              else if (item.getFrom == name) Pos.CENTER_RIGHT
+              else Pos.CENTER_LEFT
+            )
+          }
+        }
+      }
+    )
 
     MessageList.getItems.add(new Message)
     MessageList.getSelectionModel.setSelectionMode(SelectionMode.MULTIPLE)
-    loginBtn.setOnAction((_: ActionEvent) => Login())
-    sendBtn.setOnAction((_: ActionEvent) => Sender())
-
-    val promptText = "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0435!"
-    postTextArea.setPromptText(promptText)
   }
 
-  private def Sender(): Unit = {
-    if (!(postTextArea.getText == "")) {
-      val msg = new Message(postTextArea.getText, nicknameField.getText, partner)
-      if (partner != null && name != null) {
+  private def initializeButtons(): Unit = {
+    loginBtn.setOnAction(_ => login())
+    sendBtn.setOnAction(_ => sendMessage())
+    postTextArea.setPromptText("Введите сообщение!")
+  }
 
-        Main.sendMessage(msg)
-        MessageList.getItems.removeIf {
-          it =>
-            it.getPostText == inputHint
-        }
-        MessageList.getItems.add(msg)
+  private def initializeTimer(): Unit = {
+    val timerTask = new TimerTask {
+      def run(): Unit = updateViews()
+    }
+    timer.scheduleAtFixedRate(timerTask, 1000, 1000)
+  }
 
-        postTextArea.clear()
-      }
+  private def sendMessage(): Unit = {
+    val messageText = postTextArea.getText
+    if (messageText.nonEmpty && partner != null && name != null) {
+      val msg = new Message(messageText, name, partner)
+      Main.sendMessage(msg)
+      MessageList.getItems.removeIf(_.getPostText == inputHint)
+      MessageList.getItems.add(msg)
+      postTextArea.clear()
     }
   }
 
-  private def Login(): Unit = {
-    if (!(nicknameField.getText == "")) {
-      Main.rename(nicknameField.getText)
-      name = nicknameField.getText
-      timerTask.run()
+  private def login(): Unit = {
+    val nickname = nicknameField.getText
+    if (nickname.nonEmpty) {
+      Main.rename(nickname)
+      name = nickname
       nicknameField.setEditable(false)
     }
   }
 
-  def startThread(): Unit = {
-    import scala.concurrent.ExecutionContext.Implicits.global
-    new Thread() {
-      updateViewMessageList()
-      updateViewUserList()
-    }.start()
-
-    counter += 1
-    Thread.sleep(10)
+  private def updateViews(): Future[Unit] = {
+    for {
+      _ <- updateMessageList()
+      _ <- updateUserList()
+    } yield ()
   }
 
-  private def updateViewMessageList()(implicit ec: ExecutionContext): Unit = {
-    if (partner != null) {
-      Main.updateMessageList(partner).map { msg =>
-        if (!msg.getItems.isEmpty)
-          if (!MessageList.getItems.containsAll(msg.getItems)) {
-            Platform.runLater { () =>
-              MessageList.getItems.setAll(msg.getItems)
-              MessageList.refresh()
-            }
+  private def updateMessageList(): Future[Unit] = Future {
+    Option(partner).foreach { p =>
+      Main.updateMessageList(p).foreach { msg =>
+        if (
+          !msg.getItems.isEmpty && !MessageList.getItems
+            .containsAll(msg.getItems)
+        ) {
+          Platform.runLater { () =>
+            MessageList.getItems.setAll(msg.getItems.sorted)
+            MessageList.refresh()
           }
+        }
       }
     }
   }
 
-  private def updateViewUserList()(implicit ec: ExecutionContext): Unit = {
+  private def updateUserList(): Future[Unit] = Future {
     Main.updateListUser().foreach { newList =>
       if (!newList.getItems.isEmpty) {
-        val sortedList = newList.getItems.sorted
-        Platform.runLater(() => {
-          ContactList.getItems.setAll(sortedList)
-          ContactList.getItems.add(
-            new Contacts("",
-              "\u041e\u0431\u0449\u0438\u0439\u0020\u0447\u0430\u0442",
-              false))
-        })
+        val sortedList = newList.getItems.asScala.toList.sorted
+        Platform.runLater { () =>
+          {
+            ContactList.getItems.setAll(sortedList.asJava)
+            ContactList.getItems.add(new Contacts("", "General", false))
+            ContactList.refresh()
+          }
+        }
       }
     }
-  }
-
-}
-
-class MyTimerTask extends TimerTask {
-  private var controller: ControllerScala = _
-
-  def upd(controller: ControllerScala): Unit = {
-    this.controller = controller
-  }
-
-  override def run(): Unit = {
-    controller.startThread()
   }
 }
