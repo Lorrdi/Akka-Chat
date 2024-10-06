@@ -1,0 +1,10 @@
+.list-cell {
+    -fx-background-color: #9384ff;
+    -fx-font-size: 17;
+    -fx-font-style: oblique;
+    -fx-font-weight: bold
+}
+
+.list-cell:empty {
+    -fx-background-color: #c2f4ff;
+}

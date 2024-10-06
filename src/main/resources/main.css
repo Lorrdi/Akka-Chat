@@ -1,0 +1,34 @@
+/*    --background-blue: #88E8F2;*/
+/*    --background-pink: #F2C9E0;*/
+/*    --border-pink: #F28DBC;*/
+/*    --border-blue: #8FC4D9;*/
+/*    --button-color: #F28DBC;*/
+/*    --darkest-pink: #D96690;*/
+
+#body {
+    -fx-background-color: #ffffff;
+}
+
+#left-side {
+    -fx-border-color: #3b63dc;
+    -fx-border-width: 0 1 0 0;
+}
+
+.text-field {
+    -fx-border-color: #ffffff;
+}
+
+#contacts {
+    -fx-background-color: #ffffff;
+}
+
+#MessageList{
+    -fx-background-color: #ccfcfc;
+}
+.button {
+    -fx-background-color: #e82a2a;
+}
+
+.text-area {
+    -fx-border-color: #ffffff;
+}

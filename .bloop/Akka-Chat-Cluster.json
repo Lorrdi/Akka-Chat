@@ -1,0 +1,866 @@
+{
+    "version": "1.4.0",
+    "project": {
+        "name": "Akka-Chat-Cluster",
+        "directory": "F:\\projects\\scala\\Akka-Chat",
+        "workspaceDir": "F:\\projects\\scala\\Akka-Chat",
+        "sources": [
+            "F:\\projects\\scala\\Akka-Chat\\src\\main\\scala",
+            "F:\\projects\\scala\\Akka-Chat\\src\\main\\java"
+        ],
+        "dependencies": [
+            
+        ],
+        "classpath": [
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-cluster-typed_2.13\\2.6.15\\501a2c2f60facfb84b2ac0e90d918cc0fa58dd9\\akka-cluster-typed_2.13-2.6.15.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-actor-typed_2.13\\2.6.15\\79e84df5dbb20178e713ed7ee39cb909007510b8\\akka-actor-typed_2.13-2.6.15.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-cluster-tools_2.13\\2.6.15\\b9ccee64c8977c488b30b47fd4e3890c24883abb\\akka-cluster-tools_2.13-2.6.15.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-distributed-data_2.13\\2.6.15\\c642b5dc657f0fe51b661cd082e32c3a1ca03203\\akka-distributed-data_2.13-2.6.15.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-cluster_2.13\\2.6.15\\e00aed7b04a011808ae4e59df40bc47e00c4db77\\akka-cluster_2.13-2.6.15.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-remote_2.13\\2.6.15\\b2003bd37247abba6e5ec126bfef614ce4b93517\\akka-remote_2.13-2.6.15.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-slf4j_2.13\\2.6.15\\7dde4fb80ad6d7f250649e9c76239bdb8f1a8691\\akka-slf4j_2.13-2.6.15.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-stream_2.13\\2.6.15\\65342a42533cfb74944d946ae2503681e49c4c88\\akka-stream_2.13-2.6.15.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-pki_2.13\\2.6.15\\169cac49f6121e0e5f1f9d6031d3ce8da90681f\\akka-pki_2.13-2.6.15.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-coordination_2.13\\2.6.15\\43410a9732eba6787e509b37de815d8023e73267\\akka-coordination_2.13-2.6.15.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-actor_2.13\\2.6.15\\39dc714c175d39525ecc4a473d5fd2dd5ebd52fa\\akka-actor_2.13-2.6.15.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-lang.modules\\scala-java8-compat_2.13\\0.9.0\\cecd75f8db95161dda4b6ea226c964f6df4a6d8e\\scala-java8-compat_2.13-0.9.0.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe\\ssl-config-core_2.13\\0.4.2\\93eaf36919de5cfa68f39874c1829faba2a66e4b\\ssl-config-core_2.13-0.4.2.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-lang.modules\\scala-parser-combinators_2.13\\1.1.2\\1c591dfd20e117ecd0931de1a7ba12145dc83645\\scala-parser-combinators_2.13-1.1.2.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-lang\\scala-library\\2.13.13\\3b1434403ddb147b8030f98f246153e4ce622c78\\scala-library-2.13.13.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.slf4j\\slf4j-simple\\1.7.21\\be4b3c560a37e69b6c58278116740db28832232c\\slf4j-simple-1.7.21.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.openjfx\\javafx-fxml\\16\\369f646fc29d2223cc98cfc3c059f2409b3e8fcb\\javafx-fxml-16-win.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.openjfx\\javafx-controls\\16\\65cdeae29c67d25932dcc66ca4f7d269923631ba\\javafx-controls-16-win.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-protobuf-v3_2.13\\2.6.15\\99abd52ce6850274245b0586864e42dfebc2ad1c\\akka-protobuf-v3_2.13-2.6.15.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.slf4j\\slf4j-api\\1.7.30\\b5a4b6d16ab13e34a88fae84c35cd5d68cac922c\\slf4j-api-1.7.30.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.openjfx\\javafx-graphics\\16\\cd18f8477818b40cfdbcfec7e2fc15f632f0a2f\\javafx-graphics-16-win.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.agrona\\agrona\\1.9.0\\70f51277fb69a4f892ad34bb6461f1f40375c959\\agrona-1.9.0.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.openjfx\\javafx-base\\16\\e0564fea3f27dd3a10fa62e5005612333fc244bc\\javafx-base-16-win.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe\\config\\1.4.0\\a8b341fe81552834edc231193afd6f56a96f0eff\\config-1.4.0.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.lmdbjava\\lmdbjava\\0.7.0\\b4996b822444581bf7a235e6187baa7e6d5949d7\\lmdbjava-0.7.0.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.reactivestreams\\reactive-streams\\1.0.3\\d9fb7a7926ffa635b3dcaa5049fb2bfa25b3e7d0\\reactive-streams-1.0.3.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.hierynomus\\asn-one\\0.5.0\\d107d6c57c0215ae1730b4b6cae21174391b45a\\asn-one-0.5.0.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jnr-ffi\\2.1.9\\c465565992e8264012023c8b240e8175e235aa4e\\jnr-ffi-2.1.9.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jffi\\1.2.18\\e483f63d2c18544c49f30836e13ff57f4a78d32d\\jffi-1.2.18.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jffi\\1.2.18\\fb54851e631ff91651762587bc3c61a407d328df\\jffi-1.2.18-native.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jnr-constants\\0.9.12\\cb3bcb39040951bc78a540a019573eaedfc8fb81\\jnr-constants-0.9.12.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-commons\\5.0.3\\a7111830132c7f87d08fe48cb0ca07630f8cb91c\\asm-commons-5.0.3.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-analysis\\5.0.3\\c7126aded0e8e13fed5f913559a0dd7b770a10f3\\asm-analysis-5.0.3.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-util\\5.0.3\\1512e5571325854b05fb1efce1db75fcced54389\\asm-util-5.0.3.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-tree\\5.0.3\\287749b48ba7162fb67c93a026d690b29f410bed\\asm-tree-5.0.3.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm\\5.0.3\\dcc2193db20e19e1feca8b1240dbbc4e190824fa\\asm-5.0.3.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jnr-a64asm\\1.0.0\\a1cb8dbe71b5a6a0288043c3ba3ca64545be165\\jnr-a64asm-1.0.0.jar",
+            "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jnr-x86asm\\1.0.2\\6936bbd6c5b235665d87bd450f5e13b52d4b48\\jnr-x86asm-1.0.2.jar"
+        ],
+        "out": "F:\\projects\\scala\\Akka-Chat\\.bloop\\Akka-Chat-Cluster\\build",
+        "classesDir": "F:\\projects\\scala\\Akka-Chat\\.bloop\\Akka-Chat-Cluster\\build\\classes",
+        "resources": [
+            "F:\\projects\\scala\\Akka-Chat\\src\\main\\resources"
+        ],
+        "scala": {
+            "organization": "org.scala-lang",
+            "name": "scala-compiler",
+            "version": "2.13.13",
+            "options": [
+                "-deprecation",
+                "-unchecked"
+            ],
+            "jars": [
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-lang\\scala-compiler\\2.13.13\\2854b61391ab431b542224a863d5e39a535a7266\\scala-compiler-2.13.13.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-sbt\\compiler-bridge_2.13\\1.9.3\\f209697417427c3a239f809d1a0fb2e8614a1875\\compiler-bridge_2.13-1.9.3-sources.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-sbt\\compiler-interface\\1.9.3\\b882061aec6f9de3093e777c28022eec82a1e802\\compiler-interface-1.9.3.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-lang\\scala-reflect\\2.13.13\\46866f0e2cf6168322dc11f0f721c2db78d52ac7\\scala-reflect-2.13.13.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-lang\\scala-library\\2.13.13\\3b1434403ddb147b8030f98f246153e4ce622c78\\scala-library-2.13.13.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\io.github.java-diff-utils\\java-diff-utils\\4.12\\1a712a91324d566eef39817fc5c9980eb10c21db\\java-diff-utils-4.12.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.jline\\jline\\3.24.1\\babbac968fafe76884b0cf41124569e8bc004d04\\jline-3.24.1.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\net.java.dev.jna\\jna\\5.13.0\\1200e7ebeedbe0d10062093f32925a912020e747\\jna-5.13.0.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-sbt\\util-interface\\1.9.2\\b696783ce958ebdf061c53fa173a67f9f1b88754\\util-interface-1.9.2.jar"
+            ],
+            "setup": {
+                "order": "java->scala",
+                "addLibraryToBootClasspath": true,
+                "addCompilerToClasspath": false,
+                "addExtraJarsToClasspath": false,
+                "manageBootClasspath": true,
+                "filterLibraryFromClasspath": true
+            }
+        },
+        "java": {
+            "options": [
+                "-target",
+                "17",
+                "-source",
+                "17",
+                "-h",
+                "F:\\projects\\scala\\Akka-Chat\\build\\generated\\sources\\headers\\java\\main",
+                "-g",
+                "-sourcepath",
+                "",
+                "-proc:none",
+                "-XDuseUnsharedTable=true"
+            ]
+        },
+        "platform": {
+            "name": "jvm",
+            "config": {
+                "home": "C:\\Program Files\\jdk-17.0.0.1",
+                "options": [
+                    
+                ]
+            },
+            "mainClass": [
+                "org.example.Main"
+            ],
+            "classpath": [
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-cluster-typed_2.13\\2.6.15\\501a2c2f60facfb84b2ac0e90d918cc0fa58dd9\\akka-cluster-typed_2.13-2.6.15.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-actor-typed_2.13\\2.6.15\\79e84df5dbb20178e713ed7ee39cb909007510b8\\akka-actor-typed_2.13-2.6.15.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-cluster-tools_2.13\\2.6.15\\b9ccee64c8977c488b30b47fd4e3890c24883abb\\akka-cluster-tools_2.13-2.6.15.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-distributed-data_2.13\\2.6.15\\c642b5dc657f0fe51b661cd082e32c3a1ca03203\\akka-distributed-data_2.13-2.6.15.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-cluster_2.13\\2.6.15\\e00aed7b04a011808ae4e59df40bc47e00c4db77\\akka-cluster_2.13-2.6.15.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-remote_2.13\\2.6.15\\b2003bd37247abba6e5ec126bfef614ce4b93517\\akka-remote_2.13-2.6.15.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-slf4j_2.13\\2.6.15\\7dde4fb80ad6d7f250649e9c76239bdb8f1a8691\\akka-slf4j_2.13-2.6.15.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-stream_2.13\\2.6.15\\65342a42533cfb74944d946ae2503681e49c4c88\\akka-stream_2.13-2.6.15.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-pki_2.13\\2.6.15\\169cac49f6121e0e5f1f9d6031d3ce8da90681f\\akka-pki_2.13-2.6.15.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-coordination_2.13\\2.6.15\\43410a9732eba6787e509b37de815d8023e73267\\akka-coordination_2.13-2.6.15.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-actor_2.13\\2.6.15\\39dc714c175d39525ecc4a473d5fd2dd5ebd52fa\\akka-actor_2.13-2.6.15.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-lang.modules\\scala-java8-compat_2.13\\0.9.0\\cecd75f8db95161dda4b6ea226c964f6df4a6d8e\\scala-java8-compat_2.13-0.9.0.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe\\ssl-config-core_2.13\\0.4.2\\93eaf36919de5cfa68f39874c1829faba2a66e4b\\ssl-config-core_2.13-0.4.2.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-lang.modules\\scala-parser-combinators_2.13\\1.1.2\\1c591dfd20e117ecd0931de1a7ba12145dc83645\\scala-parser-combinators_2.13-1.1.2.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-lang\\scala-library\\2.13.13\\3b1434403ddb147b8030f98f246153e4ce622c78\\scala-library-2.13.13.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.slf4j\\slf4j-simple\\1.7.21\\be4b3c560a37e69b6c58278116740db28832232c\\slf4j-simple-1.7.21.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.openjfx\\javafx-fxml\\16\\369f646fc29d2223cc98cfc3c059f2409b3e8fcb\\javafx-fxml-16-win.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.openjfx\\javafx-controls\\16\\65cdeae29c67d25932dcc66ca4f7d269923631ba\\javafx-controls-16-win.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-protobuf-v3_2.13\\2.6.15\\99abd52ce6850274245b0586864e42dfebc2ad1c\\akka-protobuf-v3_2.13-2.6.15.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.slf4j\\slf4j-api\\1.7.30\\b5a4b6d16ab13e34a88fae84c35cd5d68cac922c\\slf4j-api-1.7.30.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.openjfx\\javafx-graphics\\16\\cd18f8477818b40cfdbcfec7e2fc15f632f0a2f\\javafx-graphics-16-win.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.agrona\\agrona\\1.9.0\\70f51277fb69a4f892ad34bb6461f1f40375c959\\agrona-1.9.0.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.openjfx\\javafx-base\\16\\e0564fea3f27dd3a10fa62e5005612333fc244bc\\javafx-base-16-win.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe\\config\\1.4.0\\a8b341fe81552834edc231193afd6f56a96f0eff\\config-1.4.0.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.lmdbjava\\lmdbjava\\0.7.0\\b4996b822444581bf7a235e6187baa7e6d5949d7\\lmdbjava-0.7.0.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.reactivestreams\\reactive-streams\\1.0.3\\d9fb7a7926ffa635b3dcaa5049fb2bfa25b3e7d0\\reactive-streams-1.0.3.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.hierynomus\\asn-one\\0.5.0\\d107d6c57c0215ae1730b4b6cae21174391b45a\\asn-one-0.5.0.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jnr-ffi\\2.1.9\\c465565992e8264012023c8b240e8175e235aa4e\\jnr-ffi-2.1.9.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jffi\\1.2.18\\e483f63d2c18544c49f30836e13ff57f4a78d32d\\jffi-1.2.18.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jffi\\1.2.18\\fb54851e631ff91651762587bc3c61a407d328df\\jffi-1.2.18-native.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jnr-constants\\0.9.12\\cb3bcb39040951bc78a540a019573eaedfc8fb81\\jnr-constants-0.9.12.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-commons\\5.0.3\\a7111830132c7f87d08fe48cb0ca07630f8cb91c\\asm-commons-5.0.3.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-analysis\\5.0.3\\c7126aded0e8e13fed5f913559a0dd7b770a10f3\\asm-analysis-5.0.3.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-util\\5.0.3\\1512e5571325854b05fb1efce1db75fcced54389\\asm-util-5.0.3.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-tree\\5.0.3\\287749b48ba7162fb67c93a026d690b29f410bed\\asm-tree-5.0.3.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm\\5.0.3\\dcc2193db20e19e1feca8b1240dbbc4e190824fa\\asm-5.0.3.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jnr-a64asm\\1.0.0\\a1cb8dbe71b5a6a0288043c3ba3ca64545be165\\jnr-a64asm-1.0.0.jar",
+                "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jnr-x86asm\\1.0.2\\6936bbd6c5b235665d87bd450f5e13b52d4b48\\jnr-x86asm-1.0.2.jar"
+            ]
+        },
+        "resolution": {
+            "modules": [
+                {
+                    "organization": "com.typesafe.akka",
+                    "name": "akka-cluster-tools_2.13",
+                    "version": "2.6.15",
+                    "artifacts": [
+                        {
+                            "name": "akka-cluster-tools_2.13",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-cluster-tools_2.13\\2.6.15\\8c07b2b0ba1d62d34b9b9b6c2113d4197b04804e\\akka-cluster-tools_2.13-2.6.15-sources.jar"
+                        },
+                        {
+                            "name": "akka-cluster-tools_2.13",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-cluster-tools_2.13\\2.6.15\\b9ccee64c8977c488b30b47fd4e3890c24883abb\\akka-cluster-tools_2.13-2.6.15.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe.akka",
+                    "name": "akka-cluster-typed_2.13",
+                    "version": "2.6.15",
+                    "artifacts": [
+                        {
+                            "name": "akka-cluster-typed_2.13",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-cluster-typed_2.13\\2.6.15\\5be99d66247aff30eac628e2dc07b5bbec17574d\\akka-cluster-typed_2.13-2.6.15-sources.jar"
+                        },
+                        {
+                            "name": "akka-cluster-typed_2.13",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-cluster-typed_2.13\\2.6.15\\501a2c2f60facfb84b2ac0e90d918cc0fa58dd9\\akka-cluster-typed_2.13-2.6.15.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apiguardian",
+                    "name": "apiguardian-api",
+                    "version": "1.1.0",
+                    "artifacts": [
+                        {
+                            "name": "apiguardian-api",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.apiguardian\\apiguardian-api\\1.1.0\\f3c15fe970af864390c8d0634c9f16aca1b064a8\\apiguardian-api-1.1.0-sources.jar"
+                        },
+                        {
+                            "name": "apiguardian-api",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.apiguardian\\apiguardian-api\\1.1.0\\fc9dff4bb36d627bdc553de77e1f17efd790876c\\apiguardian-api-1.1.0.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe.akka",
+                    "name": "akka-protobuf-v3_2.13",
+                    "version": "2.6.15",
+                    "artifacts": [
+                        {
+                            "name": "akka-protobuf-v3_2.13",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-protobuf-v3_2.13\\2.6.15\\99abd52ce6850274245b0586864e42dfebc2ad1c\\akka-protobuf-v3_2.13-2.6.15.jar"
+                        },
+                        {
+                            "name": "akka-protobuf-v3_2.13",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-protobuf-v3_2.13\\2.6.15\\6fd113db19b20916892a597152df16ac8732a062\\akka-protobuf-v3_2.13-2.6.15-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.junit.jupiter",
+                    "name": "junit-jupiter-engine",
+                    "version": "5.7.0",
+                    "artifacts": [
+                        {
+                            "name": "junit-jupiter-engine",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.junit.jupiter\\junit-jupiter-engine\\5.7.0\\9c4b766f5e598d39ea76858dcc5a6e3d8fa5ca7f\\junit-jupiter-engine-5.7.0-sources.jar"
+                        },
+                        {
+                            "name": "junit-jupiter-engine",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.junit.jupiter\\junit-jupiter-engine\\5.7.0\\d9044d6b45e2232ddd53fa56c15333e43d1749fd\\junit-jupiter-engine-5.7.0.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.ow2.asm",
+                    "name": "asm-util",
+                    "version": "5.0.3",
+                    "artifacts": [
+                        {
+                            "name": "asm-util",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-util\\5.0.3\\1512e5571325854b05fb1efce1db75fcced54389\\asm-util-5.0.3.jar"
+                        },
+                        {
+                            "name": "asm-util",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-util\\5.0.3\\f0f24f6666c1a15c7e202e91610476bd4ce59368\\asm-util-5.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.github.jnr",
+                    "name": "jffi",
+                    "version": "1.2.18",
+                    "artifacts": [
+                        {
+                            "name": "jffi",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jffi\\1.2.18\\e483f63d2c18544c49f30836e13ff57f4a78d32d\\jffi-1.2.18.jar"
+                        },
+                        {
+                            "name": "jffi",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jffi\\1.2.18\\5cbd7f50fd9e0de87c38d6a8cf60cd3e276bf32a\\jffi-1.2.18-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.slf4j",
+                    "name": "slf4j-simple",
+                    "version": "1.7.21",
+                    "artifacts": [
+                        {
+                            "name": "slf4j-simple",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.slf4j\\slf4j-simple\\1.7.21\\58eb8609a8f14e5bbf4d260ce5f364724079227\\slf4j-simple-1.7.21-sources.jar"
+                        },
+                        {
+                            "name": "slf4j-simple",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.slf4j\\slf4j-simple\\1.7.21\\be4b3c560a37e69b6c58278116740db28832232c\\slf4j-simple-1.7.21.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang.modules",
+                    "name": "scala-java8-compat_2.13",
+                    "version": "0.9.0",
+                    "artifacts": [
+                        {
+                            "name": "scala-java8-compat_2.13",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-lang.modules\\scala-java8-compat_2.13\\0.9.0\\54cfdbda326cd09baba9b72cdbf7e1d3fc570ca8\\scala-java8-compat_2.13-0.9.0-sources.jar"
+                        },
+                        {
+                            "name": "scala-java8-compat_2.13",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-lang.modules\\scala-java8-compat_2.13\\0.9.0\\cecd75f8db95161dda4b6ea226c964f6df4a6d8e\\scala-java8-compat_2.13-0.9.0.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.openjfx",
+                    "name": "javafx-graphics",
+                    "version": "16",
+                    "artifacts": [
+                        {
+                            "name": "javafx-graphics",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.openjfx\\javafx-graphics\\16\\cd18f8477818b40cfdbcfec7e2fc15f632f0a2f\\javafx-graphics-16-win.jar"
+                        },
+                        {
+                            "name": "javafx-graphics",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.openjfx\\javafx-graphics\\16\\f69a16a65efd17daa15aa262d13e65a6fcd85e6\\javafx-graphics-16-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe.akka",
+                    "name": "akka-stream_2.13",
+                    "version": "2.6.15",
+                    "artifacts": [
+                        {
+                            "name": "akka-stream_2.13",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-stream_2.13\\2.6.15\\65342a42533cfb74944d946ae2503681e49c4c88\\akka-stream_2.13-2.6.15.jar"
+                        },
+                        {
+                            "name": "akka-stream_2.13",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-stream_2.13\\2.6.15\\355e2ec92344cca129a215b0e8cbd231936a588e\\akka-stream_2.13-2.6.15-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.github.jnr",
+                    "name": "jnr-ffi",
+                    "version": "2.1.9",
+                    "artifacts": [
+                        {
+                            "name": "jnr-ffi",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jnr-ffi\\2.1.9\\c465565992e8264012023c8b240e8175e235aa4e\\jnr-ffi-2.1.9.jar"
+                        },
+                        {
+                            "name": "jnr-ffi",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jnr-ffi\\2.1.9\\1efc102a12d8ba95a6ad0e6e78d0391bbf01264f\\jnr-ffi-2.1.9-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.hierynomus",
+                    "name": "asn-one",
+                    "version": "0.5.0",
+                    "artifacts": [
+                        {
+                            "name": "asn-one",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.hierynomus\\asn-one\\0.5.0\\b033d88e28211d4adcd4e0d29887761417b93d00\\asn-one-0.5.0-sources.jar"
+                        },
+                        {
+                            "name": "asn-one",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.hierynomus\\asn-one\\0.5.0\\d107d6c57c0215ae1730b4b6cae21174391b45a\\asn-one-0.5.0.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.reactivestreams",
+                    "name": "reactive-streams",
+                    "version": "1.0.3",
+                    "artifacts": [
+                        {
+                            "name": "reactive-streams",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.reactivestreams\\reactive-streams\\1.0.3\\e6ffdff8c438d959376c91d94b319457354a84c5\\reactive-streams-1.0.3-sources.jar"
+                        },
+                        {
+                            "name": "reactive-streams",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.reactivestreams\\reactive-streams\\1.0.3\\d9fb7a7926ffa635b3dcaa5049fb2bfa25b3e7d0\\reactive-streams-1.0.3.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe.akka",
+                    "name": "akka-actor-typed_2.13",
+                    "version": "2.6.15",
+                    "artifacts": [
+                        {
+                            "name": "akka-actor-typed_2.13",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-actor-typed_2.13\\2.6.15\\79e84df5dbb20178e713ed7ee39cb909007510b8\\akka-actor-typed_2.13-2.6.15.jar"
+                        },
+                        {
+                            "name": "akka-actor-typed_2.13",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-actor-typed_2.13\\2.6.15\\ed00fc80d09d2fd496244d19bc2ee799a9ac7baf\\akka-actor-typed_2.13-2.6.15-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe.akka",
+                    "name": "akka-slf4j_2.13",
+                    "version": "2.6.15",
+                    "artifacts": [
+                        {
+                            "name": "akka-slf4j_2.13",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-slf4j_2.13\\2.6.15\\7dde4fb80ad6d7f250649e9c76239bdb8f1a8691\\akka-slf4j_2.13-2.6.15.jar"
+                        },
+                        {
+                            "name": "akka-slf4j_2.13",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-slf4j_2.13\\2.6.15\\c801b01dc3fb8f9a41981a6e106b7db47ad50e14\\akka-slf4j_2.13-2.6.15-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.lmdbjava",
+                    "name": "lmdbjava",
+                    "version": "0.7.0",
+                    "artifacts": [
+                        {
+                            "name": "lmdbjava",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.lmdbjava\\lmdbjava\\0.7.0\\96a1ebad3cda2208f1883bbcdb0b24c2dde203c8\\lmdbjava-0.7.0-sources.jar"
+                        },
+                        {
+                            "name": "lmdbjava",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.lmdbjava\\lmdbjava\\0.7.0\\b4996b822444581bf7a235e6187baa7e6d5949d7\\lmdbjava-0.7.0.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang",
+                    "name": "scala-library",
+                    "version": "2.13.13",
+                    "artifacts": [
+                        {
+                            "name": "scala-library",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-lang\\scala-library\\2.13.13\\3e8792cc156ae054eb4f09ddabfeac84263f5e35\\scala-library-2.13.13-sources.jar"
+                        },
+                        {
+                            "name": "scala-library",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-lang\\scala-library\\2.13.13\\3b1434403ddb147b8030f98f246153e4ce622c78\\scala-library-2.13.13.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe.akka",
+                    "name": "akka-cluster_2.13",
+                    "version": "2.6.15",
+                    "artifacts": [
+                        {
+                            "name": "akka-cluster_2.13",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-cluster_2.13\\2.6.15\\e00aed7b04a011808ae4e59df40bc47e00c4db77\\akka-cluster_2.13-2.6.15.jar"
+                        },
+                        {
+                            "name": "akka-cluster_2.13",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-cluster_2.13\\2.6.15\\c9a79d3e283dda41833543d75c996f692eaa34e4\\akka-cluster_2.13-2.6.15-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe.akka",
+                    "name": "akka-coordination_2.13",
+                    "version": "2.6.15",
+                    "artifacts": [
+                        {
+                            "name": "akka-coordination_2.13",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-coordination_2.13\\2.6.15\\417484f9083ef2969ad8152edadcc9c4ecc5612f\\akka-coordination_2.13-2.6.15-sources.jar"
+                        },
+                        {
+                            "name": "akka-coordination_2.13",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-coordination_2.13\\2.6.15\\43410a9732eba6787e509b37de815d8023e73267\\akka-coordination_2.13-2.6.15.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe.akka",
+                    "name": "akka-pki_2.13",
+                    "version": "2.6.15",
+                    "artifacts": [
+                        {
+                            "name": "akka-pki_2.13",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-pki_2.13\\2.6.15\\67f70c621bc328d00056e3b49206aea450d8efd4\\akka-pki_2.13-2.6.15-sources.jar"
+                        },
+                        {
+                            "name": "akka-pki_2.13",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-pki_2.13\\2.6.15\\169cac49f6121e0e5f1f9d6031d3ce8da90681f\\akka-pki_2.13-2.6.15.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang.modules",
+                    "name": "scala-parser-combinators_2.13",
+                    "version": "1.1.2",
+                    "artifacts": [
+                        {
+                            "name": "scala-parser-combinators_2.13",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-lang.modules\\scala-parser-combinators_2.13\\1.1.2\\1c591dfd20e117ecd0931de1a7ba12145dc83645\\scala-parser-combinators_2.13-1.1.2.jar"
+                        },
+                        {
+                            "name": "scala-parser-combinators_2.13",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.scala-lang.modules\\scala-parser-combinators_2.13\\1.1.2\\3c11f3bb6efdaf7ab83874f139e9d755215dd3b1\\scala-parser-combinators_2.13-1.1.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.junit.platform",
+                    "name": "junit-platform-commons",
+                    "version": "1.7.0",
+                    "artifacts": [
+                        {
+                            "name": "junit-platform-commons",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.junit.platform\\junit-platform-commons\\1.7.0\\a382c78ca35b240e3b88b4d68ef6884a365631f0\\junit-platform-commons-1.7.0-sources.jar"
+                        },
+                        {
+                            "name": "junit-platform-commons",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.junit.platform\\junit-platform-commons\\1.7.0\\84e309fbf21d857aac079a3c1fffd84284e1114d\\junit-platform-commons-1.7.0.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.openjfx",
+                    "name": "javafx-base",
+                    "version": "16",
+                    "artifacts": [
+                        {
+                            "name": "javafx-base",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.openjfx\\javafx-base\\16\\e0564fea3f27dd3a10fa62e5005612333fc244bc\\javafx-base-16-win.jar"
+                        },
+                        {
+                            "name": "javafx-base",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.openjfx\\javafx-base\\16\\2e1bc3824c8ba566c331d011cda06f7670a02087\\javafx-base-16-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe.akka",
+                    "name": "akka-distributed-data_2.13",
+                    "version": "2.6.15",
+                    "artifacts": [
+                        {
+                            "name": "akka-distributed-data_2.13",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-distributed-data_2.13\\2.6.15\\c642b5dc657f0fe51b661cd082e32c3a1ca03203\\akka-distributed-data_2.13-2.6.15.jar"
+                        },
+                        {
+                            "name": "akka-distributed-data_2.13",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-distributed-data_2.13\\2.6.15\\1dd2b3a00aa8dbf68f2ed67607a0d887326d47ac\\akka-distributed-data_2.13-2.6.15-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.github.jnr",
+                    "name": "jnr-a64asm",
+                    "version": "1.0.0",
+                    "artifacts": [
+                        {
+                            "name": "jnr-a64asm",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jnr-a64asm\\1.0.0\\8ed58640fc22f944f7ca5ebdbd855264c6ce6a4a\\jnr-a64asm-1.0.0-sources.jar"
+                        },
+                        {
+                            "name": "jnr-a64asm",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jnr-a64asm\\1.0.0\\a1cb8dbe71b5a6a0288043c3ba3ca64545be165\\jnr-a64asm-1.0.0.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.ow2.asm",
+                    "name": "asm-analysis",
+                    "version": "5.0.3",
+                    "artifacts": [
+                        {
+                            "name": "asm-analysis",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-analysis\\5.0.3\\c7126aded0e8e13fed5f913559a0dd7b770a10f3\\asm-analysis-5.0.3.jar"
+                        },
+                        {
+                            "name": "asm-analysis",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-analysis\\5.0.3\\f0f24f6666c1a15c7e202e91610476bd4ce59368\\asm-analysis-5.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.ow2.asm",
+                    "name": "asm",
+                    "version": "5.0.3",
+                    "artifacts": [
+                        {
+                            "name": "asm",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm\\5.0.3\\f0f24f6666c1a15c7e202e91610476bd4ce59368\\asm-5.0.3-sources.jar"
+                        },
+                        {
+                            "name": "asm",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm\\5.0.3\\dcc2193db20e19e1feca8b1240dbbc4e190824fa\\asm-5.0.3.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.ow2.asm",
+                    "name": "asm-commons",
+                    "version": "5.0.3",
+                    "artifacts": [
+                        {
+                            "name": "asm-commons",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-commons\\5.0.3\\a7111830132c7f87d08fe48cb0ca07630f8cb91c\\asm-commons-5.0.3.jar"
+                        },
+                        {
+                            "name": "asm-commons",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-commons\\5.0.3\\f0f24f6666c1a15c7e202e91610476bd4ce59368\\asm-commons-5.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.github.jnr",
+                    "name": "jnr-constants",
+                    "version": "0.9.12",
+                    "artifacts": [
+                        {
+                            "name": "jnr-constants",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jnr-constants\\0.9.12\\cb3bcb39040951bc78a540a019573eaedfc8fb81\\jnr-constants-0.9.12.jar"
+                        },
+                        {
+                            "name": "jnr-constants",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jnr-constants\\0.9.12\\fec5626a750a50e7b83e5ce7ad4b4d5ad5b3d496\\jnr-constants-0.9.12-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.github.jnr",
+                    "name": "jnr-x86asm",
+                    "version": "1.0.2",
+                    "artifacts": [
+                        {
+                            "name": "jnr-x86asm",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jnr-x86asm\\1.0.2\\6936bbd6c5b235665d87bd450f5e13b52d4b48\\jnr-x86asm-1.0.2.jar"
+                        },
+                        {
+                            "name": "jnr-x86asm",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jnr-x86asm\\1.0.2\\6bb6efcd010567ad80c8bb2bdd5065b30f0f1468\\jnr-x86asm-1.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.junit.platform",
+                    "name": "junit-platform-engine",
+                    "version": "1.7.0",
+                    "artifacts": [
+                        {
+                            "name": "junit-platform-engine",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.junit.platform\\junit-platform-engine\\1.7.0\\eadb73c5074a4ac71061defd00fc176152a4d12c\\junit-platform-engine-1.7.0.jar"
+                        },
+                        {
+                            "name": "junit-platform-engine",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.junit.platform\\junit-platform-engine\\1.7.0\\987bee3f7c9ae0c219bae82e3cfe073708cbadad\\junit-platform-engine-1.7.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.github.jnr",
+                    "name": "jffi",
+                    "version": "1.2.18",
+                    "artifacts": [
+                        {
+                            "name": "jffi",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jffi\\1.2.18\\fb54851e631ff91651762587bc3c61a407d328df\\jffi-1.2.18-native.jar"
+                        },
+                        {
+                            "name": "jffi",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.github.jnr\\jffi\\1.2.18\\5cbd7f50fd9e0de87c38d6a8cf60cd3e276bf32a\\jffi-1.2.18-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.junit.jupiter",
+                    "name": "junit-jupiter-api",
+                    "version": "5.7.0",
+                    "artifacts": [
+                        {
+                            "name": "junit-jupiter-api",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.junit.jupiter\\junit-jupiter-api\\5.7.0\\388560dc9aa3c479df4e3effce036646c8b89719\\junit-jupiter-api-5.7.0-sources.jar"
+                        },
+                        {
+                            "name": "junit-jupiter-api",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.junit.jupiter\\junit-jupiter-api\\5.7.0\\b25f3815c4c1860a73041e733a14a0379d00c4d5\\junit-jupiter-api-5.7.0.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.openjfx",
+                    "name": "javafx-controls",
+                    "version": "16",
+                    "artifacts": [
+                        {
+                            "name": "javafx-controls",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.openjfx\\javafx-controls\\16\\9851c81a573ec4d63d61882c46a9916c3d4dad8a\\javafx-controls-16-sources.jar"
+                        },
+                        {
+                            "name": "javafx-controls",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.openjfx\\javafx-controls\\16\\65cdeae29c67d25932dcc66ca4f7d269923631ba\\javafx-controls-16-win.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe.akka",
+                    "name": "akka-remote_2.13",
+                    "version": "2.6.15",
+                    "artifacts": [
+                        {
+                            "name": "akka-remote_2.13",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-remote_2.13\\2.6.15\\b2003bd37247abba6e5ec126bfef614ce4b93517\\akka-remote_2.13-2.6.15.jar"
+                        },
+                        {
+                            "name": "akka-remote_2.13",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-remote_2.13\\2.6.15\\9da4bc485434bf8bd937203ffdd0624a28d6d45f\\akka-remote_2.13-2.6.15-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe.akka",
+                    "name": "akka-actor_2.13",
+                    "version": "2.6.15",
+                    "artifacts": [
+                        {
+                            "name": "akka-actor_2.13",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-actor_2.13\\2.6.15\\39dc714c175d39525ecc4a473d5fd2dd5ebd52fa\\akka-actor_2.13-2.6.15.jar"
+                        },
+                        {
+                            "name": "akka-actor_2.13",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe.akka\\akka-actor_2.13\\2.6.15\\ac14983cd68120cd1963ecf68fd6a8d1818b82f4\\akka-actor_2.13-2.6.15-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.opentest4j",
+                    "name": "opentest4j",
+                    "version": "1.2.0",
+                    "artifacts": [
+                        {
+                            "name": "opentest4j",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.opentest4j\\opentest4j\\1.2.0\\28c11eb91f9b6d8e200631d46e20a7f407f2a046\\opentest4j-1.2.0.jar"
+                        },
+                        {
+                            "name": "opentest4j",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.opentest4j\\opentest4j\\1.2.0\\41d55b3c2254de9837b4ec8923cbd371b8a7eab5\\opentest4j-1.2.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.slf4j",
+                    "name": "slf4j-api",
+                    "version": "1.7.30",
+                    "artifacts": [
+                        {
+                            "name": "slf4j-api",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.slf4j\\slf4j-api\\1.7.30\\71a1fdefa224da50f1db6306ce609981e20186c9\\slf4j-api-1.7.30-sources.jar"
+                        },
+                        {
+                            "name": "slf4j-api",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.slf4j\\slf4j-api\\1.7.30\\b5a4b6d16ab13e34a88fae84c35cd5d68cac922c\\slf4j-api-1.7.30.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.openjfx",
+                    "name": "javafx-fxml",
+                    "version": "16",
+                    "artifacts": [
+                        {
+                            "name": "javafx-fxml",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.openjfx\\javafx-fxml\\16\\ea88d4a03ee5e2c1279212596a8f0002b643d7c3\\javafx-fxml-16-sources.jar"
+                        },
+                        {
+                            "name": "javafx-fxml",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.openjfx\\javafx-fxml\\16\\369f646fc29d2223cc98cfc3c059f2409b3e8fcb\\javafx-fxml-16-win.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe",
+                    "name": "ssl-config-core_2.13",
+                    "version": "0.4.2",
+                    "artifacts": [
+                        {
+                            "name": "ssl-config-core_2.13",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe\\ssl-config-core_2.13\\0.4.2\\93eaf36919de5cfa68f39874c1829faba2a66e4b\\ssl-config-core_2.13-0.4.2.jar"
+                        },
+                        {
+                            "name": "ssl-config-core_2.13",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe\\ssl-config-core_2.13\\0.4.2\\1ab7f768512e0100d47aee9252203efd0cffd6ee\\ssl-config-core_2.13-0.4.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.ow2.asm",
+                    "name": "asm-tree",
+                    "version": "5.0.3",
+                    "artifacts": [
+                        {
+                            "name": "asm-tree",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-tree\\5.0.3\\287749b48ba7162fb67c93a026d690b29f410bed\\asm-tree-5.0.3.jar"
+                        },
+                        {
+                            "name": "asm-tree",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.ow2.asm\\asm-tree\\5.0.3\\f0f24f6666c1a15c7e202e91610476bd4ce59368\\asm-tree-5.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe",
+                    "name": "config",
+                    "version": "1.4.0",
+                    "artifacts": [
+                        {
+                            "name": "config",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe\\config\\1.4.0\\e748b8348e1910b0935bf662e21e748290229e7f\\config-1.4.0-sources.jar"
+                        },
+                        {
+                            "name": "config",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\com.typesafe\\config\\1.4.0\\a8b341fe81552834edc231193afd6f56a96f0eff\\config-1.4.0.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.agrona",
+                    "name": "agrona",
+                    "version": "1.9.0",
+                    "artifacts": [
+                        {
+                            "name": "agrona",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.agrona\\agrona\\1.9.0\\ed0420461408176a0d902bea071736a0c7691d42\\agrona-1.9.0-sources.jar"
+                        },
+                        {
+                            "name": "agrona",
+                            "path": "C:\\Users\\lorrdi\\.gradle\\caches\\modules-2\\files-2.1\\org.agrona\\agrona\\1.9.0\\70f51277fb69a4f892ad34bb6461f1f40375c959\\agrona-1.9.0.jar"
+                        }
+                    ]
+                }
+            ]
+        },
+        "tags": [
+            "library"
+        ]
+    }
+}

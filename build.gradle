@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'application'
+    id 'scala'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+javafx {
+    version = '21.0.1'
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+ext {
+    scalaVersion = '2.13.12'
+    akkaVersion = '2.8.5'
+}
+
+dependencies {
+    implementation platform("com.typesafe.akka:akka-bom_${scalaVersion.substring(0, 4)}:${akkaVersion}")
+
+    implementation "com.typesafe.akka:akka-actor-typed_${scalaVersion.substring(0, 4)}"
+    implementation "com.typesafe.akka:akka-cluster-typed_${scalaVersion.substring(0, 4)}"
+    implementation "com.typesafe.akka:akka-remote_${scalaVersion.substring(0, 4)}"
+
+    implementation "org.scala-lang:scala-library:${scalaVersion}"
+    implementation 'org.slf4j:slf4j-simple:2.0.9'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.1'
+}
+
+application {
+    mainClass = 'org.example.Main'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+shadowJar {
+    archiveBaseName.set('akka-chat-cluster')
+    archiveClassifier.set('')
+    archiveVersion.set('')
+}
